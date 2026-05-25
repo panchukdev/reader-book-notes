@@ -1,0 +1,150 @@
+<%- include("partials/header.ejs") %>
+<main>
+        <div class="sidebar">
+
+            <div class="library-sidebar">
+                <div class="sidebar-heading">
+                    <h1>My Library</h1>
+                    <p><%=total%> books in total</p>
+                </div>
+                <div class="sort">
+                    <p class="sort-title">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.1924 5.65685C11.5829 5.26633 11.5829 4.63316 11.1924 4.24264L8.36397 1.41421C8.30576 1.356 8.24485 1.30212 8.18165 1.25259C7.50286 0.720577 6.55947 0.689024 5.84929 1.15793C5.73839 1.23115 5.63317 1.31658 5.53554 1.41421L2.70711 4.24264C2.31658 4.63316 2.31658 5.26633 2.70711 5.65685C3.09763 6.04738 3.7308 6.04738 4.12132 5.65685L6.00003 3.77814V18C6.00003 18.5523 6.44775 19 7.00003 19C7.55232 19 8.00003 18.5523 8.00003 18V3.8787L9.77818 5.65685C10.1687 6.04737 10.8019 6.04737 11.1924 5.65685Z" fill="#0F0F0F"/>
+                            <path d="M12.7071 18.3432C12.3166 18.7337 12.3166 19.3668 12.7071 19.7574L15.5355 22.5858C15.6332 22.6834 15.7384 22.7689 15.8493 22.8421C16.6256 23.3546 17.6805 23.2692 18.364 22.5858L21.1924 19.7574C21.5829 19.3668 21.5829 18.7337 21.1924 18.3432C20.8019 17.9526 20.1687 17.9526 19.7782 18.3432L18 20.1213L18 6C18 5.44771 17.5523 5 17 5C16.4477 5 16 5.44771 16 6L16 20.2218L14.1213 18.3432C13.7308 17.9526 13.0976 17.9526 12.7071 18.3432Z" fill="#0F0F0F"/>
+                        </svg>
+                        Sort By
+                    </p>
+                    <form action="/" method="get">
+                        <input type="hidden" name="sort" value="recently-added">
+                        <input type="hidden" name="filter" value="<%= currentFilter %>">
+
+                        <button type="submit" class="<%= currentSort === 'recently-added' ? 'active-sort-filter' : '' %>">
+                            Recently Added
+                        </button>
+                    </form>
+                    <form action="/" method="get">
+                        <input type="hidden" name="sort" value="title">
+                        <input type="hidden" name="filter" value="<%= currentFilter %>">
+
+                        <button type="submit" class="<%= currentSort === 'title' ? 'active-sort-filter' : '' %>">
+                            Title (A-Z)
+                        </button>
+                    </form>
+                    <form action="/" method="get">
+                        <input type="hidden" name="sort" value="progress">
+                        <input type="hidden" name="filter" value="<%= currentFilter %>">
+
+                        <button type="submit" class="<%= currentSort === 'progress' ? 'active-sort-filter' : '' %>">
+                            Progress
+                        </button>
+                    </form>
+
+                </div>
+                <div class="filter">
+                    <p class="filter-title">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g id="Interface / Filter">
+                            <path id="Vector" d="M20 5.6001C20 5.04005 19.9996 4.75981 19.8906 4.5459C19.7948 4.35774 19.6423 4.20487 19.4542 4.10899C19.2403 4 18.9597 4 18.3996 4H5.59961C5.03956 4 4.75981 4 4.5459 4.10899C4.35774 4.20487 4.20487 4.35774 4.10899 4.5459C4 4.75981 4 5.04005 4 5.6001V6.33736C4 6.58195 4 6.70433 4.02763 6.81942C4.05213 6.92146 4.09263 7.01893 4.14746 7.1084C4.20928 7.20928 4.29591 7.29591 4.46875 7.46875L9.53149 12.5315C9.70443 12.7044 9.79044 12.7904 9.85228 12.8914C9.90711 12.9808 9.94816 13.0786 9.97266 13.1807C10 13.2946 10 13.4155 10 13.6552V18.411C10 19.2682 10 19.6971 10.1805 19.9552C10.3382 20.1806 10.5814 20.331 10.8535 20.3712C11.1651 20.4172 11.5487 20.2257 12.3154 19.8424L13.1154 19.4424C13.4365 19.2819 13.5966 19.2013 13.7139 19.0815C13.8176 18.9756 13.897 18.8485 13.9453 18.7084C14 18.5499 14 18.37 14 18.011V13.6626C14 13.418 14 13.2958 14.0276 13.1807C14.0521 13.0786 14.0926 12.9808 14.1475 12.8914C14.2089 12.7911 14.2947 12.7053 14.4653 12.5347L14.4688 12.5315L19.5315 7.46875C19.7044 7.2958 19.7904 7.20932 19.8523 7.1084C19.9071 7.01893 19.9482 6.92146 19.9727 6.81942C20 6.70551 20 6.58444 20 6.3448V5.6001Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+                        </svg>
+                        Filter
+                    </p>
+                    <form action="/" method="get">
+                        <input type="hidden" name="filter" value="all">
+                        <input type="hidden" name="sort" value="<%= currentSort %>">
+
+                        <button type="submit" class="<%= currentFilter === 'all' ? 'active-sort-filter' : '' %>">
+                            All Books
+                        </button>
+                    </form>
+                    <form action="/" method="get">
+                        <input type="hidden" name="filter" value="reading">
+                        <input type="hidden" name="sort" value="<%= currentSort %>">
+
+                        <button type="submit" class="<%= currentFilter === 'reading' ? 'active-sort-filter' : '' %>">
+                            Currently Reading
+                        </button>
+                    </form>
+
+                    <form action="/" method="get">
+                        <input type="hidden" name="filter" value="finished">
+                        <input type="hidden" name="sort" value="<%= currentSort %>">
+
+                        <button type="submit" class="<%= currentFilter === 'finished' ? 'active-sort-filter' : '' %>">
+                            Finished
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="library-sidebar-buttons">
+                <button id="select-all-btn">
+                    <svg fill="black" width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <g data-name="Layer 2">
+                        <g data-name="checkmark-circle">
+                        <rect width="24" height="24" opacity="0"/>
+                        <path d="M9.71 11.29a1 1 0 0 0-1.42 1.42l3 3A1 1 0 0 0 12 16a1 1 0 0 0 .72-.34l7-8a1 1 0 0 0-1.5-1.32L12 13.54z"/>
+                        <path d="M21 11a1 1 0 0 0-1 1 8 8 0 0 1-8 8A8 8 0 0 1 6.33 6.36 7.93 7.93 0 0 1 12 4a8.79 8.79 0 0 1 1.9.22 1 1 0 1 0 .47-1.94A10.54 10.54 0 0 0 12 2a10 10 0 0 0-7 17.09A9.93 9.93 0 0 0 12 22a10 10 0 0 0 10-10 1 1 0 0 0-1-1z"/>
+                        </g>
+                        </g>
+                    </svg>
+                    Select All
+                </button>
+                <form action="/delete" method="post">
+                    <input type="hidden" name="ids" id="selected-ids-input" />
+                    <button id="delete-btn">
+                        <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 11V17" stroke="rgba(240, 13, 13, 0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 11V17" stroke="rgba(240, 13, 13, 0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4 7H20" stroke="rgba(240, 13, 13, 0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6 7H12H18V18C18 19.6569 16.6569 21 15 21H9C7.34315 21 6 19.6569 6 18V7Z" stroke="rgba(240, 13, 13, 0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9 5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V7H9V5Z" stroke="rgba(240, 13, 13, 0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Delete Selected
+                    </button>
+                </form>  
+            </div>
+        </div>
+        <div class="library">
+        <div class="list-container">
+            <ul class="books-list">
+                <% books.forEach((book) => { %>
+                    <li>
+                        <a href="/book/<%=book.id%>" class="book">
+                            <div class="one-book" data-id="<%=book.id%>">
+                                <% if (!book.cover_id) { %>
+                                <img class="book-cover" src="/book.jpg" alt="default book image">
+                                <%  } else { %>
+                                <img class="book-cover" src="https://covers.openlibrary.org/b/id/<%=book.cover_id%>-M.jpg" alt="book cover">
+                                <%  } %>
+                                <div class="book-info-notes">
+                                    <div class="book-title-author">
+                                        <p class="list-title"><%= book.title %></p>
+                                        <p class="list-author"><%= book.author %></p>
+                                    </div>
+                                    <% if (book.notes) {%>
+                                        <p class="book-notes"><%= book.notes %></p>
+                                    <% } else { %>
+                                        <p class="book-notes">There is no notes for this book</p>
+                                    <% }%>
+                                    <div class="progress">
+                                        <div class="progress-top">
+                                            <p>Progress</p>
+                                            <p><%=book.percent%>%</p>
+                                        </div>
+                                        <div class="progress-bar">
+                                            <progress value="<%=book.read_pages%>" max="<%=book.pages%>"></progress>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </a>
+                    </li>
+            <%  }) %>
+            </ul>
+            <footer>Made by panchukdev in 2026</footer>
+        </div>
+    </div>
+</main>
+<%- include("partials/footer.ejs") %>
+
